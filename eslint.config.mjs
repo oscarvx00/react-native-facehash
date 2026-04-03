@@ -21,6 +21,8 @@ export default defineConfig([
     rules: {
       'react/react-in-jsx-scope': 'off',
       'prettier/prettier': 'error',
+      quotes: ['error', 'double'],
+      'react-native/no-inline-styles': 'off',
     },
   },
   {
