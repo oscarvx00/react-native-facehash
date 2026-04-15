@@ -77,6 +77,12 @@ export interface FacehashProps {
   enableBlink?: boolean;
 
   /**
+   * Color for the face elements (eyes, initial letter).
+   * @default "#000"
+   */
+  faceColor?: string;
+
+  /**
    * Additional styles for the face container.
    */
   style?: StyleProp<ViewStyle>;
@@ -94,6 +100,7 @@ export function Facehash({
   shape = "circle",
   showInitial = true,
   colors,
+  faceColor = "#000",
   gradientOverlayClass,
   onRenderMouth,
   enableBlink: _enableBlink = false,
@@ -137,8 +144,8 @@ export function Facehash({
         width="100%"
         idPrefix={svgIdPrefix}
         scene={scene}
+        faceColor={faceColor}
         showInitial={showInitial && !onRenderMouth}
-        // TODO Mising color
         variant={gradientOverlayClass ? "solid" : variant}
       />
 

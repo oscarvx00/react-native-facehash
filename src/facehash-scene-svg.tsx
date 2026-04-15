@@ -12,6 +12,7 @@ import { StyleSheet, type StyleProp, type ViewStyle } from "react-native";
 
 type FacehashSceneSvgProps = {
   backgroundColor: string;
+  faceColor?: string;
   height?: number | string;
   idPrefix: string;
   scene: FacehashScene;
@@ -27,6 +28,7 @@ function sanitizeId(value: string): string {
 
 export function FacehashSceneSvg({
   backgroundColor,
+  faceColor = "#000",
   height = "100%",
   idPrefix,
   scene,
@@ -76,13 +78,13 @@ export function FacehashSceneSvg({
         >
           <G>
             {scene.faceGeometry.leftEyePaths.map((path) => (
-              <Path d={path} fill="currentColor" key={path} />
+              <Path d={path} fill={faceColor} key={path} />
             ))}
           </G>
 
           <G>
             {scene.faceGeometry.rightEyePaths.map((path) => (
-              <Path d={path} fill="currentColor" key={path} />
+              <Path d={path} fill={faceColor} key={path} />
             ))}
           </G>
         </G>
@@ -90,7 +92,7 @@ export function FacehashSceneSvg({
 
       {showInitial && (
         <Text
-          fill="currentColor"
+          fill={faceColor}
           fontFamily="monospace"
           fontSize={scene.initialLayout.fontSize}
           fontWeight="700"
