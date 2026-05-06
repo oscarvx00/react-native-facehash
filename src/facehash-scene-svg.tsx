@@ -88,21 +88,21 @@ export function FacehashSceneSvg({
             ))}
           </G>
         </G>
-      </G>
 
-      {showInitial && (
-        <Text
-          fill={faceColor}
-          fontFamily="monospace"
-          fontSize={scene.initialLayout.fontSize}
-          fontWeight="700"
-          textAnchor="middle"
-          x={scene.initialLayout.x}
-          y={scene.initialLayout.y}
-        >
-          {scene.data.initial}
-        </Text>
-      )}
+        {showInitial && (
+          <Text
+            fill={faceColor}
+            fontFamily="monospace"
+            fontSize={scene.initialLayout.fontSize}
+            fontWeight="700"
+            textAnchor="middle"
+            x={scene.initialLayout.x}
+            y={scene.initialLayout.y}
+          >
+            {scene.data.initial}
+          </Text>
+        )}
+      </G>
     </Svg>
   );
 }
