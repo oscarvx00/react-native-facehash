@@ -1,5 +1,5 @@
 ---
-"react-native-facehash-example": patch
+"react-native-facehash": patch
 ---
 
 Move Text into group element
