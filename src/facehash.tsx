@@ -8,6 +8,7 @@ import {
 } from "./core";
 import { useId, useMemo } from "react";
 import { FacehashSceneSvg } from "./facehash-scene-svg";
+import { useFacehashContext } from "./facehash-context";
 
 export type { Intensity3D, Variant, Shape } from "./core";
 
@@ -88,24 +89,44 @@ export interface FacehashProps {
   style?: StyleProp<ViewStyle>;
 }
 
+const DEFAULTS = {
+  size: 40,
+  variant: "gradient" as Variant,
+  intensity3d: "dramatic" as Intensity3D,
+  shape: "circle" as Shape,
+  showInitial: true,
+  faceColor: "#000",
+};
+
 function sanitizeId(value: string): string {
   return value.replace(/[^a-zA-Z0-9_-]/g, "-");
 }
 
 export function Facehash({
   name,
-  size = 40,
-  variant = "gradient",
-  intensity3d = "dramatic",
-  shape = "circle",
-  showInitial = true,
-  colors,
-  faceColor = "#000",
+  size: sizeProp,
+  variant: variantProp,
+  intensity3d: intensity3dProp,
+  shape: shapeProp,
+  showInitial: showInitialProp,
+  colors: colorsProp,
+  faceColor: faceColorProp,
   gradientOverlayClass,
   onRenderMouth,
   enableBlink: _enableBlink = false,
   style,
 }: Readonly<FacehashProps>) {
+  const ctx = useFacehashContext();
+
+  const size = sizeProp ?? ctx.size ?? DEFAULTS.size;
+  const variant = variantProp ?? ctx.variant ?? DEFAULTS.variant;
+  const intensity3d =
+    intensity3dProp ?? ctx.intensity3d ?? DEFAULTS.intensity3d;
+  const shape = shapeProp ?? ctx.shape ?? DEFAULTS.shape;
+  const showInitial =
+    showInitialProp ?? ctx.showInitial ?? DEFAULTS.showInitial;
+  const colors = colorsProp ?? ctx.colors;
+  const faceColor = faceColorProp ?? ctx.faceColor ?? DEFAULTS.faceColor;
   const reactId = useId();
   const colorsLength = colors?.length;
   const scene = useMemo(

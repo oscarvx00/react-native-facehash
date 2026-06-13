@@ -2,6 +2,12 @@ export type { FacehashProps, Variant, Intensity3D, Shape } from "./facehash";
 export { Facehash } from "./facehash";
 
 export {
+  FacehashProvider,
+  useFacehashContext,
+  type FacehashContextValue,
+} from "./facehash-context";
+
+export {
   Avatar,
   type AvatarContextValue,
   type AvatarProps,

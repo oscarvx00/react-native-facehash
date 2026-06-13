@@ -36,6 +36,37 @@ Same string = same face. Always.
 | `gradientOverlayClass` | `string` | — | ⚠️ Not used in React Native (web-only concept) |
 | `style` | `StyleProp<ViewStyle>` | — | Additional styles for the container |
 
+## FacehashProvider
+
+Wrap your component tree with `FacehashProvider` to set default props for every `Facehash` instance underneath it. Individual instances can still override any value.
+
+```tsx
+import { FacehashProvider, Facehash } from 'react-native-facehash';
+
+const BRAND_COLORS = ["#264653", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51"];
+
+<FacehashProvider colors={BRAND_COLORS} size={48} shape="circle" variant="gradient">
+  <Facehash name="alice" />
+  <Facehash name="bob" />
+  {/* Override a single prop for one instance */}
+  <Facehash name="charlie" size={64} />
+</FacehashProvider>
+```
+
+### Provider props
+
+All props are optional. Any prop set on a `<Facehash>` instance takes precedence over the provider value.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `colors` | `string[]` | Background color palette shared by all instances |
+| `size` | `number \| string` | Default size |
+| `variant` | `"gradient" \| "solid"` | Default background style |
+| `intensity3d` | `"none" \| "subtle" \| "medium" \| "dramatic"` | Default 3D effect |
+| `shape` | `"circle" \| "square"` | Default container shape |
+| `showInitial` | `boolean` | Default for showing the initial letter |
+| `faceColor` | `string` | Default color for face elements |
+
 ## Examples
 
 ### Basic usage
@@ -92,8 +123,11 @@ import { ActivityIndicator } from 'react-native';
 // Component
 import { Facehash } from 'react-native-facehash';
 
+// Provider (shared defaults)
+import { FacehashProvider, useFacehashContext } from 'react-native-facehash';
+
 // Types
-import type { FacehashProps, Variant, Intensity3D, Shape } from 'react-native-facehash';
+import type { FacehashProps, FacehashContextValue, Variant, Intensity3D, Shape } from 'react-native-facehash';
 
 // Utilities
 import { stringHash } from 'react-native-facehash';
